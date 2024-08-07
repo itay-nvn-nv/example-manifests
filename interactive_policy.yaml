@@ -1,0 +1,137 @@
+---
+apiVersion: run.ai/v2alpha1
+kind: InteractivePolicy
+metadata:
+  name: mount-aurora-adrienj
+  namespace: runai-aurora-adrienj
+spec:
+  pvcs:
+    rules:
+      canAdd: false
+    items:
+      pvc-aurora-adrienj-home:
+        value:
+          claimName: pvc-aurora-adrienj-home
+          existingPvc: true
+          path: /myhome
+          readWriteMany: true
+          readOnly: false
+        rules:
+          canEdit: false
+          canRemove: false
+      nfs-shared:
+        value:
+          claimName: pvc-aurora-adrienj-shared
+          existingPvc: true
+          path: /shared
+          readWriteMany: true
+          readOnly: false
+        rules:
+          canEdit: false
+          canRemove: false
+      nfs-quickstart:
+        value:
+          claimName: pvc-aurora-adrienj-quickstart
+          existingPvc: true
+          path: /quickstart
+          readWriteMany: false
+          readOnly: true
+        rules:
+          canEdit: false
+          canRemove: false
+      pvc-aurora-adrienj-data-readonly-aurora:
+        value:
+          claimName: pvc-aurora-adrienj-data-readonly-aurora
+          existingPvc: true
+          path: /mydata/aurora
+          readWriteMany: false
+          readOnly: true
+        rules:
+          canEdit: false
+          canRemove: false
+      pvc-aurora-adrienj-data-write-aurora:
+        value:
+          claimName: pvc-aurora-adrienj-data-write-aurora
+          existingPvc: true
+          path: /mydata/aurora/adrienj
+          readWriteMany: true
+          readOnly: false
+        rules:
+          canEdit: false
+          canRemove: false
+      pvc-aurora-adrienj-data-write-aurora-shared:
+        value:
+          claimName: pvc-aurora-adrienj-data-write-aurora-shared
+          existingPvc: true
+          path: /mydata/aurora/shared
+          readWriteMany: true
+          readOnly: false
+        rules:
+          canEdit: false
+          canRemove: false
+  volumes:
+    itemRules:
+      nfsServer:
+        options:
+          - disabled: true
+  workingDir:
+    value: /myhome
+    rules:
+      required: false
+      canEdit: true
+  tty:
+    value: true
+    rules:
+      required: false
+      canEdit: true
+  stdin:
+    value: true
+    rules:
+      required: false
+      canEdit: true
+  environment:
+    items:
+      HOME:
+        value: "/myhome"
+  notebookToken:
+    rules:
+      required: true
+      canEdit: true
+    value: XXXXXXXX
+  allowPrivilegeEscalation:
+    value: false
+    rules:
+      canEdit: false
+      required: false
+  cpu:
+    value: "1"
+    rules:
+      required: false
+      canEdit: true
+  cpuLimit:
+    value: "8"
+    rules:
+      required: false
+      canEdit: true
+  memory:
+    value: "100M"
+    rules:
+      required: false
+      canEdit: true
+  memoryLimit:
+    value: "25G"
+    rules:
+      required: false
+      canEdit: true
+  s3:
+    rules:
+      canAdd: true
+    items:
+      s3-aurora-adrienj-aurora-aurora_data:
+        value:
+          bucket: "aurora_data"
+          key: "XXXXXXXX"
+          path: /s3/aurora/aurora_data
+          secret: "XXXXXXXX"
+          url: "XXXXXXXX"
+---
