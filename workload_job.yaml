@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job # 
+metadata:
+  name: itay-job-wow
+  namespace: runai-zzz # 
+spec:
+  template:
+    spec:
+      containers:
+      - name: itay-job-wow
+        image: zebra999/swiss_army_knife:latest
+          command:
+          - sleep
+          - infinity
+        resources:
+          request:
+            cpu: 500m # 
+      restartPolicy: Never
+      schedulerName: runai-scheduler #
