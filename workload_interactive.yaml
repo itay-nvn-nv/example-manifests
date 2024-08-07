@@ -1,0 +1,38 @@
+apiVersion: run.ai/v2alpha1
+kind: InteractiveWorkload # 
+metadata:
+  name: test999
+  namespace: runai-bbb
+spec:
+  gpu:
+    value: "1"
+  image:
+    value: docker.io/jupyter/datascience-notebook:ubuntu-22.04
+  name:
+    value: test999
+  command:
+    value: jupyter lab
+  arguments:
+    value: --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.base_url=/${RUNAI_PROJECT}/${RUNAI_JOB_NAME} --NotebookApp.token='' --notebook-dir=/ --NotebookApp.allow_origin='*'
+  environment:
+    items:
+      RUNAI_JOB_NAME:
+        value: ${RUNAI_JOB_NAME}
+      RUNAI_PROJECT:
+        value: ${RUNAI_PROJECT}
+  exposedUrls:
+    items:
+      url:
+        value:
+          containerPort: 8888
+  pvcs:
+    items:
+      pvc-1:
+        value:
+          claimName: jy-job-pvc
+          ephemeral: true # so that the pvc stays even after workload deletion
+          path: /mount_workspace
+          readOnly: false
+          readWriteOnce: true
+          size: 3G
+          storageClass: ebs-csi
