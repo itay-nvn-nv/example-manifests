@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: itay-workflow-wow
+  namespace: runai-argo-wf
+  labels:
+    project: argo-wf
+    workflows.argoproj.io/creator: system-serviceaccount-argo-argo-server
+spec:
+  entrypoint: runai-train-job
+  templates:
+    - name: runai-train-job
+      container:
+        image: gcr.io/run-ai-demo/quickstart-demo:latest
+        resources:
+          requests:
+            nvidia.com/gpu: '1'
+          limits:
+            nvidia.com/gpu: '1'
+      retryStrategy:
+        limit: 3
+        retryPolicy: Always
+  ttlStrategy:
+    secondsAfterCompletion: 300
+  podGC:
+    strategy: OnPodCompletion
+  workflowMetadata:
+    labels:
+      project: argo-wf
