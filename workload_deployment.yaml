@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment # 
+kind: Deployment
 metadata:
   name: itay-deploy-wow
   namespace: runai-zzz # 
@@ -16,13 +16,11 @@ spec:
       containers:
         - resources:
             limits:
-              nvidia.com/gpu: 1 # 
-          image: zebra999/swiss_army_knife:latest
+              nvidia.com/gpu: 1
+          image: nginx
           command:
           - sleep
           - infinity
           imagePullPolicy: Always
           name: itay-deploy-wow
-          ports:
-            - containerPort: 8888
-      schedulerName: runai-scheduler # 
+      schedulerName: runai-scheduler
