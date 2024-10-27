@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    gpu-fraction: "0.5"
+  name: random-logger-pod
+  namespace: runai-test
+spec:
+  containers:
+  - name: random-logger
+    image: cyberdog123/random-logger
+    env:
+    - name: RUNAI_GPU_MEMORY_REQUEST
+      value: "0.50"
+    - name: RUNAI_GPU_MEMORY_LIMIT
+      value: "0.50"
+  schedulerName: runai-scheduler
