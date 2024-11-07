@@ -10,5 +10,5 @@ spec:
     resources:
       limits:
         nvidia.com/gpu: 1  # Request one GPU
-    command: ["nvidia-smi"]
+    command: ["sleep","infinity"] # run nvidia-smi
   restartPolicy: Never
