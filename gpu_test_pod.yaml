@@ -8,7 +8,7 @@ spec:
   - name: nvidia-smi
     image: nvidia/cuda:12.0.1-runtime-ubuntu22.04  # Using a CUDA-enabled base image
     resources:
-      limits:
+      requests:
         nvidia.com/gpu: 1  # Request one GPU
     command: ["sleep","infinity"] # run nvidia-smi
   restartPolicy: Never
