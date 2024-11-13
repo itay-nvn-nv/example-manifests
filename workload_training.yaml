@@ -1,0 +1,14 @@
+apiVersion: run.ai/v2alpha1
+kind: TrainingWorkload
+metadata:
+  name: test999
+  namespace: runai-test
+spec:
+  image:
+    value: nginx
+  name:
+    value: test999
+  command:
+    value: sleep
+  arguments:
+    value: infinity
