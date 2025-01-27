@@ -5,12 +5,13 @@ metadata:
   namespace: default
 spec:
   containers:
-  - name: nvidia-smi
-    image: nvidia/cuda:12.0.1-runtime-ubuntu22.04  # Using a CUDA-enabled base image
+  - name: main
+    image: cyberdog123/pytorch_gpu_utilizer # or nvidia/cuda:12.0.1-runtime-ubuntu22.04 for no utilization test
     resources:
       requests:
         nvidia.com/gpu: 1
       limits:
         nvidia.com/gpu: 1
-    command: ["sleep","infinity"] # run nvidia-smi
   restartPolicy: Never
+#  nodeSelector:
+#    kubernetes.io/hostname: worker01
