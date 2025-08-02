@@ -19,5 +19,5 @@ runai training pytorch submit pytorch-hello-world-gpu \
   --restart-policy OnFailure \
   --master-restart-policy OnFailure \
   --command \
-  -- /bin/bash -c "curl -o /tmp/pytorch-gpu-training.py https://myserver.com/scripts/pytorch-gpu-training.py && python3 /tmp/pytorch-gpu-training.py"
+  -- /bin/bash -c "curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py && python3 /tmp/pytorch-gpu-training.py"
 ```

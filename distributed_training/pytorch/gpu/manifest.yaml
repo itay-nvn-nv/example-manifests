@@ -18,7 +18,7 @@ spec:
                 - /bin/bash
                 - -c
                 - |
-                  curl -o /tmp/pytorch-gpu-training.py https://myserver.com/scripts/pytorch-gpu-training.py
+                  curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py
                   python3 /tmp/pytorch-gpu-training.py
               resources:
                 limits:
@@ -38,7 +38,7 @@ spec:
                 - /bin/bash
                 - -c
                 - |
-                  curl -o /tmp/pytorch-gpu-training.py https://myserver.com/scripts/pytorch-gpu-training.py
+                  curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py
                   python3 /tmp/pytorch-gpu-training.py
               resources:
                 limits:
