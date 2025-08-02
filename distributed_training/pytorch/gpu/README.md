@@ -11,7 +11,7 @@ run this command:
 # Equivalent to the PyTorchJob YAML manifest
 
 runai training pytorch submit pytorch-hello-world-gpu \
-  -p default \
+  -p test \
   -i pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime \
   --workers 2 \
   --gpu-devices-request 1 \
@@ -19,5 +19,5 @@ runai training pytorch submit pytorch-hello-world-gpu \
   --restart-policy OnFailure \
   --master-restart-policy OnFailure \
   --command \
-  -- /bin/bash -c "curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py && python3 /tmp/pytorch-gpu-training.py"
+  -- /bin/bash -c "apt update && apt install -y curl && curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py && python3 /tmp/pytorch-gpu-training.py"
 ```

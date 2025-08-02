@@ -18,6 +18,7 @@ spec:
                 - /bin/bash
                 - -c
                 - |
+                  apt update && apt install -y curl
                   curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py
                   python3 /tmp/pytorch-gpu-training.py
               resources:
@@ -38,6 +39,7 @@ spec:
                 - /bin/bash
                 - -c
                 - |
+                  apt update && apt install -y curl
                   curl -o /tmp/pytorch-gpu-training.py https://raw.githubusercontent.com/itay-nvn-nv/example-manifests/refs/heads/main/distributed_training/pytorch/gpu/script.py
                   python3 /tmp/pytorch-gpu-training.py
               resources:
