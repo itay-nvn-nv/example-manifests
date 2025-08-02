@@ -1,0 +1,51 @@
+apiVersion: kubeflow.org/v1
+kind: PyTorchJob
+metadata:
+  name: pytorch-hello-world-cpu
+  namespace: runai-test
+spec:
+  pytorchReplicaSpecs:
+    Master:
+      replicas: 1
+      restartPolicy: OnFailure
+      template:
+        spec:
+          schedulerName: runai-scheduler
+          containers:
+          - name: pytorch
+            image: pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
+            command:
+            - /bin/bash
+            - -c
+            - |
+              curl -o /tmp/pytorch-hello-world.py https://myserver.com/scripts/pytorch-hello-world.py
+              python3 /tmp/pytorch-hello-world.py
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+    Worker:
+      replicas: 2
+      restartPolicy: OnFailure
+      template:
+        spec:
+          schedulerName: runai-scheduler
+          containers:
+          - name: pytorch
+            image: pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
+            command:
+            - /bin/bash
+            - -c
+            - |
+              curl -o /tmp/pytorch-hello-world.py https://myserver.com/scripts/pytorch-hello-world.py
+              python3 /tmp/pytorch-hello-world.py
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
